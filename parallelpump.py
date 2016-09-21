@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# Pump the items in a list with multi processes.
+# Assistant module. Startup N multiple processes 
+# to handle items in a list.
 
 import sys
 import os
@@ -21,10 +22,8 @@ class Parapump:
             proc = Process(target = subprocWorker, args = procArgs)
             self.subprocs.append(proc)
 
-
     def printError(self, text):
         sys.stderr.write(text+"\n")
-
 
     def run(self):
         startedProcs = []
@@ -41,12 +40,11 @@ class Parapump:
 
 def subprocWorker(id, sharedItems, sharedInfo, computedCount, mutex, mutexCnt, func):
     total = len(sharedItems)
-
     while True:
         mutexCnt.acquire()
         computedCount.value += 1
         idx = computedCount.value
-        mutexCnt.release()
+        mutexCnt.release()  
         if idx >= total:
             break
 
