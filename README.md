@@ -1,7 +1,7 @@
-# parallelpump
-Asistant module. Pump items in a list with multi processes.
+# Parallel Pump
+Asistant module. Startup N multiple processes to handle items in a list.
 
-Quick Start
+Example
 -----------
 
 Parallel printing with mutex:
@@ -9,18 +9,21 @@ Parallel printing with mutex:
 ```python
 from parallelpump import Parapump
 
-def concurrentFunc(item, mutex, sharedInfo):
+# Build your own function to handle each item
+def myConcurrentFunc(item, mutex, sharedInfo):
     mutex.acquire()
     print("I am eating " + item)
     mutex.release()
 
 if __name__ == '__main__':
-    todoList = ["banana", "apple", "fried chicken", "pie", "battery", "flower"]
+    food = ["banana", "apple", "fried chicken", "pie", "battery", "flower"]
 
+    # Create 3 sub processes to handle "food".
     pumper = Parapump(
-        func = concurrentFunc, 
-        listToParallelize = todoList, 
+        func = myConcurrentFunc, 
+        listToParallelize = food, 
         numJobs = 3)
 
+    # This run() function is blocked. 
     pumper.run()
 ```
