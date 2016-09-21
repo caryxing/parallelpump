@@ -9,7 +9,7 @@ Parallel printing with mutex:
 ```python
 from parallelpump import Parapump
 
-def concurrentFuc(item, mutex, sharedInfo):
+def concurrentFunc(item, mutex, sharedInfo):
     mutex.acquire()
     print("I am eating " + item)
     mutex.release()
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     todoList = ["banana", "apple", "fried chicken", "pie", "battery", "flower"]
 
     pumper = Parapump(
-        func = concurrentFuc, 
+        func = concurrentFunc, 
         listToParallelize = todoList, 
         numJobs = 3)
 
