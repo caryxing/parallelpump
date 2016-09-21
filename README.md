@@ -1,8 +1,12 @@
 # parallelpump
 Asistant module. Pump items in a list with multi processes.
 
-# Example
-```
+Quick Start
+-----------
+
+Parallel printing with mutex:
+
+```python
 from parallelpump import Parapump
 
 def concurrentFuc(item, mutex, sharedInfo):
